@@ -10,7 +10,7 @@ namespace dotnetcore_asp.Core.Database
     public class MyAppDbContext : DbContext
     {
 
-        public DbSet<Todo> Todos { get; set; }
+        public DbSet<Bookmarker> Bookmarkers { get; set; }
 
         public string DbPath { get; }
 

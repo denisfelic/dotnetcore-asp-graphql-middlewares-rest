@@ -25,7 +25,7 @@ builder.Services
     .AddMutationType(m => m.Name("Mutation"))
     .AddType<MutateMusicCollection>()
     .AddType<MutateTodoCollection>()
-    .AddType<QueryTodoCollection>()
+   // .AddType<QueryTodoCollection>()
     .AddType<QueryMusicCollection>();
 
 var app = builder.Build();
