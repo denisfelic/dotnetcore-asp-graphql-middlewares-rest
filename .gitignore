@@ -1,0 +1,73 @@
+# Arquivos temporários que geralmente são ignorados
+bin/
+obj/
+
+# Arquivos do Visual Studio
+.vscode/
+.vs/
+
+# Pasta de dependências do .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Pasta de configuração do Rider
+.idea/
+
+# Ficheiros de configuração específicos do utilizador
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ficheiros de log
+*.log
+
+# Ícones de ficheiros para ficheiros e pastas
+Thumbs.db
+ehthumbs.db
+
+# Ficheiros Windows
+Desktop.ini
+$RECYCLE.BIN/
+ehthumbs.db
+System Volume Information/
+
+# Ficheiros de configuração do Visual Studio Code
+.vscode/
+
+# Pasta de armazenamento de análise, que contém resultados da análise em cache
+*.sonarlint/
+
+# Arquivos de projeto Rider
+.idea/
+
+# Ficheiros de histórico de sessão de análise, que são armazenados no diretório /Reports pelo analisador de código
+.sonarqube/
+
+# Ficheiros de configuração do Rider
+.idea/
+
+# Pasta de análise de código JetBrains
+resharper/
+
+# Projetos Rider
+.idea/
+
+# Pasta de análise de código do Visual Studio
+.vs2019/
+
+# Pasta de análise de código do Rider
+.idea/
+
+
+publish
+
+
+
+sqlite
+todos.json
+todosdb.db
+todosdb.db-shm
+todosdb.db-wal
+musicis.json
