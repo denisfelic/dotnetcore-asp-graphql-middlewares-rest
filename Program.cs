@@ -21,12 +21,11 @@ builder.Services
 .AddGraphQLServer()
 .RegisterDbContext<MyAppDbContext>()
     .AddInMemorySubscriptions()
+    .AddFiltering()
     .AddQueryType(q => q.Name("Query"))
     .AddMutationType(m => m.Name("Mutation"))
-    .AddType<MutateMusicCollection>()
-    .AddType<MutateTodoCollection>()
-   // .AddType<QueryTodoCollection>()
-    .AddType<QueryMusicCollection>();
+    .AddType<BookMakerQuery>()
+    .AddType<BookMakerMutations>();
 
 var app = builder.Build();
 

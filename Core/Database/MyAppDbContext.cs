@@ -23,5 +23,14 @@ namespace dotnetcore_asp.Core.Database
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlite($"Data Source={DbPath}");
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Bookmarker>()
+            .HasMany(b => b.Bookmarkers)
+            .WithOne()
+            .HasForeignKey(b => b.BookmarkerId)
+            .OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }

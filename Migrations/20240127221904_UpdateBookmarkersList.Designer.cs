@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using dotnetcore_asp.Core.Database;
 
@@ -10,9 +11,11 @@ using dotnetcore_asp.Core.Database;
 namespace dotnetcore_asp.Migrations
 {
     [DbContext(typeof(MyAppDbContext))]
-    partial class TodoContextModelSnapshot : ModelSnapshot
+    [Migration("20240127221904_UpdateBookmarkersList")]
+    partial class UpdateBookmarkersList
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.1");
@@ -43,8 +46,7 @@ namespace dotnetcore_asp.Migrations
                 {
                     b.HasOne("dotnetcore_asp.Core.Models.Bookmarker", null)
                         .WithMany("Bookmarkers")
-                        .HasForeignKey("BookmarkerId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BookmarkerId");
                 });
 
             modelBuilder.Entity("dotnetcore_asp.Core.Models.Bookmarker", b =>
