@@ -15,7 +15,9 @@ namespace dotnetcore_asp.GraphQL.Queries
         [UseFiltering]
         public async Task<List<Bookmarker>> GetBookmarkers(CancellationToken ct, MyAppDbContext dbContext)
         {
-            return await dbContext.Bookmarkers.ToListAsync(ct);
+            return await dbContext.Bookmarkers
+            .Include(b => b.Bookmarkers)
+            .ToListAsync(ct);
         }
 
         // public async Task<Bookmarker?> GetBookmarker(MyAppDbContext dbContext, int id)
@@ -25,4 +27,5 @@ namespace dotnetcore_asp.GraphQL.Queries
         //     .FirstOrDefaultAsync(b => b.Id == id);
         // }
     }
+
 }

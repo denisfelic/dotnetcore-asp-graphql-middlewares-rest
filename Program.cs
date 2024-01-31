@@ -6,13 +6,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services
 
 .AddDbContext<MyAppDbContext>()
-
 .AddCors(options =>
    {
        options.AddDefaultPolicy(builder =>
        {
            builder
-               .WithOrigins("https://studio.apollographql.com")
+                .AllowAnyOrigin()
+               //   .WithOrigins(["https://studio.apollographql.com", "http://localhost:5173", "*"])
                .AllowAnyHeader()
                .AllowAnyMethod();
        });
@@ -27,9 +27,27 @@ builder.Services
     .AddType<BookMakerQuery>()
     .AddType<BookMakerMutations>();
 
+
+builder.Services.AddControllers();
+builder.Services.AddSwaggerGen();
+
+
+
 var app = builder.Build();
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+
 app.UseCors();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+    );
+
 app.UseRouting().UseEndpoints(endpoints =>
 {
 
