@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using dotnetcore_asp.Core.Models.Abstract;
 
 namespace dotnetcore_asp.Core.Models
 {
-    public class Bookmarker
+    public class Bookmarker : BaseEntity
     {
 
         public int Id { get; set; }

@@ -2,6 +2,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using dotnetcore_asp.Core.Database;
+using dotnetcore_asp.Core.Models;
+using dotnetcore_asp.Core.Validation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,6 +42,28 @@ namespace dotnetcore_asp.Core.Controllers
             }
 
             return Ok(bookmarker);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> CreateBookmarker([FromBody] CreateBookmarkerModel createBookmarkerModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var createdBookmarker = new Bookmarker
+            {
+                Name = createBookmarkerModel.Name,
+                Url = createBookmarkerModel.Url,
+                BookmarkerId = createBookmarkerModel.Bookmarkerid
+            };
+
+            await _dbContext.AddAsync(createdBookmarker);
+            await _dbContext.SaveChangesAsync();
+
+            return Ok(createdBookmarker);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using dotnetcore_asp.Core.Database;
 
@@ -10,9 +11,11 @@ using dotnetcore_asp.Core.Database;
 namespace dotnetcore_asp.Migrations
 {
     [DbContext(typeof(MyAppDbContext))]
-    partial class TodoContextModelSnapshot : ModelSnapshot
+    [Migration("20240202213722_UpdatedAtCreatedAt")]
+    partial class UpdatedAtCreatedAt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.1");
@@ -26,13 +29,13 @@ namespace dotnetcore_asp.Migrations
                     b.Property<int?>("BookmarkerId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Url")
