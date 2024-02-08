@@ -30,7 +30,7 @@ namespace dotnetcore_asp.GraphQL.Mutations
 
         }
 
-        public async Task<Bookmarker> UpdateBookMarker(MyAppDbContext dbContext, int id, UpdateBookMaker updateDookmarkerData)
+        public async Task<Bookmarker> UpdateBookMarker(MyAppDbContext dbContext, int id, UpdateBookMaker updateBookmarkerData)
         {
 
             try
@@ -43,20 +43,14 @@ namespace dotnetcore_asp.GraphQL.Mutations
                     throw new GraphQLRequestException("Null");
                 }
 
-                if (updateDookmarkerData.Bookmarker is not null)
+                if (updateBookmarkerData.BookmarkerId is not null || bookmarker.BookmarkerId is not null)
                 {
-                    //bookmarker.bookmarker = updateDookmarkerData.Bookmarker;
+                    bookmarker.BookmarkerId = updateBookmarkerData.BookmarkerId;
 
-                    updateDookmarkerData.Bookmarker.ForEach(b =>
-                    {
-                        var newBookMarker = new Bookmarker { Id = b.Id };
-                        dbContext.Bookmarkers.Attach(newBookMarker);
-                        bookmarker?.Bookmarkers?.Add(newBookMarker);
-                    });
                 }
 
-                bookmarker.Name = updateDookmarkerData.Name ?? bookmarker.Name;
-                bookmarker.Url = updateDookmarkerData.Url ?? bookmarker.Url;
+                bookmarker.Name = updateBookmarkerData.Name ?? bookmarker.Name;
+                bookmarker.Url = updateBookmarkerData.Url ?? bookmarker.Url;
 
                 dbContext.Update(bookmarker);
                 dbContext.SaveChanges();
@@ -96,7 +90,7 @@ namespace dotnetcore_asp.GraphQL.Mutations
         }
 
 
-        public record UpdateBookMaker(string? Name, string? Url, List<Bookmarker>? Bookmarker);
+        public record UpdateBookMaker(string? Name, string? Url, int? BookmarkerId);
 
         public class DeleteReturnType<T>
         {
