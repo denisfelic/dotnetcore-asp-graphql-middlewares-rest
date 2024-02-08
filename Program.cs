@@ -3,22 +3,24 @@ using dotnetcore_asp.GraphQL.Mutations;
 using dotnetcore_asp.GraphQL.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services
 
-.AddDbContext<MyAppDbContext>()
-.AddCors(options =>
+// Database configuration
+builder.Services.AddDbContext<MyAppDbContext>();
+
+// Cors configuration
+builder.Services.AddCors(options =>
    {
        options.AddDefaultPolicy(builder =>
        {
            builder
                 .AllowAnyOrigin()
-               //   .WithOrigins(["https://studio.apollographql.com", "http://localhost:5173", "*"])
                .AllowAnyHeader()
                .AllowAnyMethod();
        });
-   })
+   });
 
-.AddGraphQLServer()
+// Graph QL Configurations
+builder.Services.AddGraphQLServer()
 .RegisterDbContext<MyAppDbContext>()
     .AddInMemorySubscriptions()
     .AddFiltering()
@@ -29,21 +31,30 @@ builder.Services
     .AddType<BookMakerMutations>();
 
 
+// Http Configurations
 builder.Services.AddControllers();
+
+// Swagger Configurations
 builder.Services.AddSwaggerGen();
 
 
 
 var app = builder.Build();
 
+// Dev only configurations
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-
+// Cors Configurations
 app.UseCors();
+
+// Static files configurations
+app.UseStaticFiles();
+
+// Configure the HTTP request pipeline.
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}"
