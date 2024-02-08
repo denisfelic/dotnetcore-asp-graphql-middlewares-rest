@@ -25,6 +25,7 @@ builder.Services
     .AddQueryType(q => q.Name("Query"))
     .AddMutationType(m => m.Name("Mutation"))
     .AddType<BookMakerQuery>()
+    .AddTypeExtension<BookMarkerExtension>()
     .AddType<BookMakerMutations>();
 
 

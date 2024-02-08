@@ -28,4 +28,16 @@ namespace dotnetcore_asp.GraphQL.Queries
         // }
     }
 
+
+[ExtendObjectType(typeof(Bookmarker))]
+public sealed class BookMarkerExtension {
+    public bool IsFolder([Parent] Bookmarker bookmarker){
+        return bookmarker.Url != "#";
+    }
+
+    public int ChildCount([Parent] Bookmarker bookmarker) {
+        return (bookmarker.Bookmarkers?.Count)  ?? 0;
+    }
+}
+
 }
