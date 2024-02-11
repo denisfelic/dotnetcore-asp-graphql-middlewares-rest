@@ -24,8 +24,10 @@ builder.Services
     .AddFiltering()
     .AddQueryType(q => q.Name("Query"))
     .AddMutationType(m => m.Name("Mutation"))
+    .AddType<UploadType>()
     .AddType<BookMakerQuery>()
     .AddTypeExtension<BookMarkerExtension>()
+    .AddType<UpdateBookmarkerFaviconMutation>()
     .AddType<BookMakerMutations>();
 
 
