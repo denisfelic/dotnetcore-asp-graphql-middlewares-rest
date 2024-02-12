@@ -1,4 +1,5 @@
 using dotnetcore_asp.Core.Database;
+using dotnetcore_asp.Core.Handlers;
 using dotnetcore_asp.GraphQL.Mutations;
 using dotnetcore_asp.GraphQL.Queries;
 
@@ -41,10 +42,15 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-app.Use(async (context, next) => {
+// Custom middleware examples
+app.Use(async (context, next) =>
+{
     Console.WriteLine("My custom middleware Runs!");
     await next();
 });
+
+app.UseMiddleware<FullHostMiddleware>();
+
 
 // Dev only configurations
 if (app.Environment.IsDevelopment())
