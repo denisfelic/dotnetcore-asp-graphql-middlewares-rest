@@ -41,6 +41,11 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.Use(async (context, next) => {
+    Console.WriteLine("My custom middleware Runs!");
+    await next();
+});
+
 // Dev only configurations
 if (app.Environment.IsDevelopment())
 {
