@@ -42,7 +42,6 @@ app.Use(async (context, next) =>
     await next();
 });
 
-app.UseMiddleware<FullHostMiddleware>();
 
 // Graph QL app Configurations
 // app.UseGraphQlAppConfiguration();
@@ -67,6 +66,8 @@ app.MapControllerRoute(
     );
 
 app.UseRouting();
+
+//app.UseMiddleware<FullHostMiddleware>();
 
 app.MapGet("/", () => "Open /graphql");
 

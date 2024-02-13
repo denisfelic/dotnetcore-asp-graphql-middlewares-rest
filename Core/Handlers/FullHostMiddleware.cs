@@ -21,6 +21,11 @@ namespace dotnetcore_asp.Core.Handlers
         {
             string queryString = httpContext.Request.QueryString.ToString();
             Console.WriteLine(requestCount);
+
+            if (requestCount == 3) {
+                httpContext.Response.StatusCode = StatusCodes.Status403Forbidden;
+                return;
+            }
             await next(httpContext);
            
             requestCount++;

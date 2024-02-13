@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using dotnetcore_asp.Core.Database;
+using dotnetcore_asp.Core.Handlers;
 using dotnetcore_asp.Core.Models;
 using dotnetcore_asp.Core.Validation;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,7 @@ namespace dotnetcore_asp.Core.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [CustomAuthMiddleware]
     public class BookmarkerController : ControllerBase
     {
 
