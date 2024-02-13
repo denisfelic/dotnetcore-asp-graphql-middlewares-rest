@@ -1,5 +1,6 @@
 using dotnetcore_asp.Core.Database;
 using dotnetcore_asp.Core.Handlers;
+using dotnetcore_asp.GraphQL;
 using dotnetcore_asp.GraphQL.Mutations;
 using dotnetcore_asp.GraphQL.Queries;
 
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Database configuration
 builder.Services.AddDbContext<MyAppDbContext>();
+
 
 // Cors configuration
 builder.Services.AddCors(options =>
@@ -21,16 +23,7 @@ builder.Services.AddCors(options =>
    });
 
 // Graph QL Configurations
-builder.Services.AddGraphQLServer()
-.RegisterDbContext<MyAppDbContext>()
-    .AddInMemorySubscriptions()
-    .AddFiltering()
-    .AddQueryType(q => q.Name("Query"))
-    .AddMutationType(m => m.Name("Mutation"))
-    .AddType<BookMakerQuery>()
-    .AddTypeExtension<BookMarkerExtension>()
-    .AddType<BookMakerMutations>();
-
+// builder.Services.UseGraphQLServiceConfiguration();
 
 // Http Configurations
 builder.Services.AddControllers();
@@ -51,6 +44,8 @@ app.Use(async (context, next) =>
 
 app.UseMiddleware<FullHostMiddleware>();
 
+// Graph QL app Configurations
+// app.UseGraphQlAppConfiguration();
 
 // Dev only configurations
 if (app.Environment.IsDevelopment())
@@ -71,12 +66,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}"
     );
 
-app.UseRouting().UseEndpoints(endpoints =>
-{
-
-    app.UseWebSockets();
-    endpoints.MapGraphQL();
-});
+app.UseRouting();
 
 app.MapGet("/", () => "Open /graphql");
 
